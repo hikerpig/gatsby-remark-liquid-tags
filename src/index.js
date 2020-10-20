@@ -15,7 +15,7 @@ const getSoundcloud = require("./embeds/soundcloud");
 // const getTwitter = require("./embeds/twitter");
 
 module.exports = ({ markdownAST }) => {
-	visit(markdownAST, "paragraph", node => {
+	visit(markdownAST, "paragraph", (node) => {
 		// Grab the innerText of the paragraph node
 		let text = toString(node);
 
@@ -28,8 +28,8 @@ module.exports = ({ markdownAST }) => {
 			let tagDetails = breakLiquidTag(matches[0]); // only interested in the first match
 			let { tagName, tagOptions } = tagDetails;
 
-            let embed;
-            
+			let embed;
+
 			// check the tagname to know which embed is to be used
 			switch (tagName) {
 				case "codepen":

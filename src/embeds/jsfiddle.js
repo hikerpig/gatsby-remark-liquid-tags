@@ -7,11 +7,11 @@ const { checkURL } = require("../utils");
  * @returns {String} iframe
  */
 const jsfiddle = ([url, ...options]) => {
-    url = checkURL(url);
-    if(url === undefined) return;
+	url = checkURL(url);
+	if (url === undefined) return;
 
-    const {hostname, pathname } = new URL(url)
-    url = hostname + pathname // we need only jsfiddle.net...
+	const { hostname, pathname } = new URL(url);
+	url = hostname + pathname; // we need only jsfiddle.net...
 
 	let theme = options.find((option) => option.startsWith("theme="));
 	if (theme !== undefined) theme = theme.replace("theme=", "");

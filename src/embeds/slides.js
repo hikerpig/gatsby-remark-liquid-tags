@@ -1,4 +1,3 @@
-
 const { checkURL } = require("../utils");
 
 /**
@@ -7,10 +6,10 @@ const { checkURL } = require("../utils");
  * @returns {String} iframe
  */
 const slides = ([url]) => {
-    url = checkURL(url);
-    if(url === undefined) return;
+	url = checkURL(url);
+	if (url === undefined) return;
 
-    return `<iframe
+	return `<iframe
         src="${url}/embed"
         width="600"
         height="420"
@@ -20,7 +19,7 @@ const slides = ([url]) => {
         mozallowfullscreen
         allowfullscreen>
     </iframe>
-`
+`;
 };
 
 module.exports = slides;

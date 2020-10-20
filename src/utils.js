@@ -20,11 +20,11 @@ const breakLiquidTag = (tag) => {
 };
 
 const checkURL = (url) => {
-  return url.startsWith("https://") ? removeTrailingSlash(url) : null;
+	return url.startsWith("https://") ? removeTrailingSlash(url) : null;
 };
 
 const removeTrailingSlash = (url) => {
-  return url.replace(/\/+$/, "");
+	return url.replace(/\/+$/, "");
 };
 
 module.exports = { breakLiquidTag, checkURL };
