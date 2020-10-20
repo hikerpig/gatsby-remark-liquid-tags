@@ -11,17 +11,28 @@ const getJsfiddle = require("./embeds/jsfiddle");
 const getSlides = require("./embeds/slides");
 const getSoundcloud = require("./embeds/soundcloud");
 
+const serviceMap = {
+	codepen: getCodepen,
+	youtube: getYoutube,
+	codesandbox: getCodesandbox,
+	'google-slides': getGoogleslides,
+	'jsfiddle': getJsfiddle,
+	'slides': getSlides,
+	'soundcloud': getSoundcloud,
+}
+
 // twitter is a work in progress, having issues because it returns a promise
 // const getTwitter = require("./embeds/twitter");
 
-module.exports = ({ markdownAST }) => {
+const LIQUID_BLOCK_EXP = /{\%.*\%}/g;
+
+module.exports = ({ markdownAST }, { customServiceMap = {}}) => {
 	visit(markdownAST, "paragraph", (node) => {
 		// Grab the innerText of the paragraph node
 		let text = toString(node);
 
 		// Test paragraph if it includes a liquid tag format
-		let exp = /{\%.*\%}/g;
-		const matches = text.match(exp);
+		const matches = text.match(LIQUID_BLOCK_EXP);
 
 		// Only show embeds for liquid tags
 		if (matches !== null) {
@@ -29,37 +40,17 @@ module.exports = ({ markdownAST }) => {
 			let { tagName, tagOptions } = tagDetails;
 
 			let embed;
-
 			// check the tagname to know which embed is to be used
-			switch (tagName) {
-				case "codepen":
-					embed = getCodepen(tagOptions);
-					break;
-				case "youtube":
-					embed = getYoutube(tagOptions);
-					break;
-				case "codesandbox":
-					embed = getCodesandbox(tagOptions);
-					break;
-				case "google-slides":
-					embed = getGoogleslides(tagOptions);
-					break;
-				case "jsfiddle":
-					embed = getJsfiddle(tagOptions);
-					break;
-				case "slides":
-					embed = getSlides(tagOptions);
-					break;
-				case "soundcloud":
-					embed = getSoundcloud(tagOptions);
-					break;
+			const serviceFn = serviceMap[tagName] || customServiceMap[tagName]
+			if (serviceFn) {
+				embed = serviceFn(tagOptions);
 			}
 
 			if (embed === undefined) return;
 
 			node.type = "html";
 			node.children = undefined;
-			node.value = text.replace(exp, embed);
+			node.value = text.replace(LIQUID_BLOCK_EXP, embed);
 		}
 	});
 
