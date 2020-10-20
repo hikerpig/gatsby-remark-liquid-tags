@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-remark-liquid-tags",
+  "name": "@hikerpig/gatsby-remark-liquid-tags",
   "version": "1.1.6",
   "description": "A gatsby plugin for custom embeds of services with liquid tags",
   "main": "./index.js",
@@ -16,19 +16,19 @@
     "embed",
     "codepen"
   ],
-  "author": "Dillion Megida <dillionmegida@gmail.com>",
+  "author": "hikerpig <hikerpigwinnie@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dillionmegida/gatsby-remark-liquid-tags"
+    "url": "https://github.com//gatsby-remark-liquid-tags"
   },
   "files": [
     "src",
     "index.js"
   ],
-  "homepage": "https://github.com/dillionmegida/gatsby-remark-liquid-tags#readme",
+  "homepage": "https://github.com/hikerpig/gatsby-remark-liquid-tags#readme",
   "bugs": {
-    "url": "https://github.com/dillionmegida/gatsby-remark-liquid-tags/issues"
+    "url": "https://github.com/hikerpig/gatsby-remark-liquid-tags/issues"
   },
   "dependencies": {
     "mdast-util-to-string": "^1.1.0",
